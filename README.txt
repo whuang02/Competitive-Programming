@@ -1,0 +1,1 @@
+This repo is for all of the problems that I will be solving in the my competitive programming course.
