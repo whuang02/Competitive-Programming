@@ -55,10 +55,13 @@ local.properties
 *.pgd
 *.rsp
 *.sbr
+*.sln
 *.tlb
 *.tli
 *.tlh
 *.tmp
+*.vcxproj
+*.vcxproj.filters
 *.vspscc
 .builds
 *.dotCover
