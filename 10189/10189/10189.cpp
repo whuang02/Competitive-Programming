@@ -77,13 +77,15 @@ int main(){
 					}
 				}
 				if(rowAt+1 == x){
-					cout << "Field #" << field << ":" << endl;
-					printGrid(grid, x, y);
 					cout << endl;
+					cout << "Field #" << field << ":" << endl;
+					printGrid(grid, x, y);					
 					field++;
 					break;
 				}
 			}
 		}
 	}
+
+	return 0;
 }
