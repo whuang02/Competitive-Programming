@@ -1,3 +1,8 @@
+/*
+ Solution to problem 10033
+	by: Wei Wei Huang
+ Language: C++
+*/
 #include <iostream>
 #include <string>
 using namespace std;

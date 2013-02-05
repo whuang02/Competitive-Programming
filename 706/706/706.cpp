@@ -1,25 +1,27 @@
+/*
+ Solution to problem 706
+	by: Wei Wei Huang
+ Language: C++
+*/
 #include <iostream>
 #include <vector>
-#include <fstream>
 using namespace std;
-
-ofstream myfile;
 
 //print all '-'
 void printHorizontal(int s, const vector<bool>& hor){
 	int size = hor.size();
 	for(int i = size-1; i >= 0; i--){
-		myfile << " ";
+		cout << " ";
 		if(hor[i] == true){
 			for(int j = 0; j < s; j++)
-				myfile << "-";
+				cout << "-";
 		}
 		else{
 			for(int j = 0; j < s; j++)
-				myfile << " ";
+				cout << " ";
 		}
-		if(i > 0) myfile << "  ";
-		else myfile << " ";
+		if(i > 0) cout << "  ";
+		else cout << " ";
 	}
 }
 
@@ -28,18 +30,18 @@ void printVertical(int s, const vector<bool>& vertLeft, const vector<bool>& vert
 	int size = vertLeft.size();
 	for(int k = 0; k < s; k++){
 		for(int i = size-1; i >= 0; i--){
-			if(vertLeft[i] == true)	myfile << "|";
-			else myfile << " ";
+			if(vertLeft[i] == true)	cout << "|";
+			else cout << " ";
 		
 			for(int j = 0; j < s; j++)
-				myfile << " ";
+				cout << " ";
 		
-			if(vertRight[i] == true) myfile << "|";
-			else myfile << " ";
+			if(vertRight[i] == true) cout << "|";
+			else cout << " ";
 			
-			if(i > 0) myfile << " ";
+			if(i > 0) cout << " ";
 		}
-		if(k < s-1) myfile << endl;
+		if(k < s-1) cout << endl;
 	}
 }
 
@@ -55,11 +57,8 @@ int main(){
 	vector<bool> left_2 = vector<bool>();
 	vector<bool> right_2 = vector<bool>();
 	vector<bool> bottom = vector<bool>();
-	myfile.open("C:/Users/Wei Wei/Desktop/output.txt");
+
 	while (cin >> s >> n){
-		if(s == 0 && n == 0){
-			break;
-		}
 		//initialize sides
 		while(n != 0)
 		{
@@ -161,20 +160,25 @@ int main(){
 					break;
 			}			
 		}
-		if(first == false) myfile << endl;
-		else first = false;
+		if(s == 0 && n == 0){
+			cout << endl;
+			break;
+		}
+		else{
+			if(first == false) cout << endl;
+			else first = false;
 
-		printHorizontal(s, top);
-		myfile << endl;
-		printVertical(s, left_1, right_1);
-		myfile << endl;
-		printHorizontal(s, middle);
-		myfile << endl;
-		printVertical(s, left_2, right_2);
-		myfile << endl;
-		printHorizontal(s, bottom);
-		myfile << endl;
-
+			printHorizontal(s, top);
+			cout << endl;
+			printVertical(s, left_1, right_1);
+			cout << endl;
+			printHorizontal(s, middle);
+			cout << endl;
+			printVertical(s, left_2, right_2);
+			cout << endl;
+			printHorizontal(s, bottom);
+			cout << endl;
+		}
 		top.clear();
 		left_1.clear();
 		right_1.clear();
@@ -183,5 +187,4 @@ int main(){
 		right_2.clear();
 		bottom.clear();
 	}
-	myfile.close();
 }

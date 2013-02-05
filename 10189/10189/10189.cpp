@@ -57,12 +57,13 @@ void printGrid(int** grid, int x, int y){
 			else
 				cout << grid[i][j];
 		}
-		cout << endl;
-	}
+		if(i < x-1)
+			cout << endl;
+	}	
 }
 
 int main(){
-	int x,y,field = 1;
+	int x,y,field = 1, first = 0;
 	while(cin >> x >> y){
 		int** grid = createGrid(x,y);
 		string row;
@@ -77,7 +78,7 @@ int main(){
 					}
 				}
 				if(rowAt+1 == x){
-					cout << endl;
+					if(first != 0) cout << endl << endl;
 					cout << "Field #" << field << ":" << endl;
 					printGrid(grid, x, y);					
 					field++;
@@ -85,6 +86,8 @@ int main(){
 				}
 			}
 		}
+		if(first == 0) 
+			first = 1;
 	}
 
 	return 0;
