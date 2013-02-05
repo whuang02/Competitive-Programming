@@ -31,7 +31,6 @@ public:
 			int thirdDigit = (instruction % 100) % 10;
 
 			numInstructionsExecuted++;
-			//cout << "firstDigit: " << firstDigit << " second: " << secondDigit << " third: " << thirdDigit<< endl;
 			switch(firstDigit){
 				case 0:
 					if(registers[thirdDigit] != 0){
