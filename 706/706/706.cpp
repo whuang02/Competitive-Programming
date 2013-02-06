@@ -161,11 +161,10 @@ int main(){
 			}			
 		}
 		if(s == 0 && n == 0){
-			cout << endl;
 			break;
 		}
 		else{
-			if(first == false) cout << endl;
+			if(first == false) cout << endl << endl;
 			else first = false;
 
 			printHorizontal(s, top);
@@ -177,7 +176,6 @@ int main(){
 			printVertical(s, left_2, right_2);
 			cout << endl;
 			printHorizontal(s, bottom);
-			cout << endl;
 		}
 		top.clear();
 		left_1.clear();
