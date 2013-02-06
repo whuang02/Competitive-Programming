@@ -5,6 +5,8 @@
 */
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include <string.h>
 using namespace std;
 
 class Computer{
@@ -83,6 +85,7 @@ public:
 	void runCase(int cases){
 		for(int i = 0; i < cases; i++){
 			numInstructionsExecuted = 0;
+			end = false;
 			memset(registers, 0, sizeof(int) * 10);
 			memset(ram, 0, sizeof(int) * 1000);
 			string input;
@@ -91,6 +94,7 @@ public:
 				getline(cin, input);
 				getline(cin, input);
 			}
+
 			int ramLocation = 0;
 			while(getline(cin, input)){
 				if(input == ""){

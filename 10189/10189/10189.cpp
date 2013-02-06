@@ -51,24 +51,24 @@ void incrementNeighbors(int** grid, int x, int y, int maxRow, int maxCol){
 void printGrid(int** grid, int x, int y){
 	for(int i = 0; i < x; i++)
 	{
+		cout << endl;
 		for(int j = 0; j < y; j++){
 			if(grid[i][j] == -1)
 				cout << '*';
 			else
 				cout << grid[i][j];
 		}
-		if(i < x-1)
-			cout << endl;
 	}	
 }
 
 int main(){
-	int x,y,field = 1, first = 0;
+	int x,y,field = 1;
+	bool first = true;
 	while(cin >> x >> y){
 		int** grid = createGrid(x,y);
 		string row;
 		//set all mines to -1 and increment neighbors
-		if(x != 0 && y != 0){
+		if(x != 0 || y != 0){
 			for(int rowAt = 0; rowAt < x; rowAt++){
 				cin >> row;
 				for(int i = 0; i < y; i++){
@@ -78,20 +78,19 @@ int main(){
 					}
 				}
 				if(rowAt+1 == x){
-					if(first != 0) cout << endl << endl;
-					cout << "Field #" << field << ":" << endl;
-					printGrid(grid, x, y);					
+					if(!first)
+						cout << endl << endl;
+					cout << "Field #" << field << ":";
+					printGrid(grid, x, y);
 					field++;
 					break;
 				}
 			}
 		}
-		if(first == 0) 
-			first = 1;
+		if(first)
+			first = false;
 		for( int i = 0 ; i < x ; i++ )
 			delete [] grid[i] ;
 		delete [] grid;
 	}
-
-	return 0;
 }
