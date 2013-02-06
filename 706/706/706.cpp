@@ -5,6 +5,7 @@
 */
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 
 //print all '-'
@@ -46,9 +47,8 @@ void printVertical(int s, const vector<bool>& vertLeft, const vector<bool>& vert
 }
 
 int main(){
-	short s;
-	unsigned n;
-	bool first = true;
+	int s;
+	string n;
 
 	vector<bool> top = vector<bool>();
 	vector<bool> left_1 = vector<bool>();
@@ -60,13 +60,12 @@ int main(){
 
 	while (cin >> s >> n){
 		//initialize sides
-		while(n != 0)
+		for(int i = n.size(); i > 0; i--)
 		{
-			int digit = n % 10;
-			n /= 10;
+			char digit = n.at(i-1);
 
 			switch(digit){
-				case 0:
+				case '0':
 					top.push_back(true);
 					left_1.push_back(true);
 					right_1.push_back(true);
@@ -75,7 +74,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(true);
 					break;
-				case 1:
+				case '1':
 					top.push_back(false);
 					left_1.push_back(false);
 					right_1.push_back(true);
@@ -84,7 +83,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(false);
 					break;
-				case 2:
+				case '2':
 					top.push_back(true);
 					left_1.push_back(false);
 					right_1.push_back(true);
@@ -93,7 +92,7 @@ int main(){
 					right_2.push_back(false);
 					bottom.push_back(true);
 					break;
-				case 3:
+				case '3':
 					top.push_back(true);
 					left_1.push_back(false);
 					right_1.push_back(true);
@@ -102,7 +101,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(true);
 					break;
-				case 4:
+				case '4':
 					top.push_back(false);
 					left_1.push_back(true);
 					right_1.push_back(true);
@@ -111,7 +110,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(false);
 					break;
-				case 5:
+				case '5':
 					top.push_back(true);
 					left_1.push_back(true);
 					right_1.push_back(false);
@@ -120,7 +119,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(true);
 					break;
-				case 6:
+				case '6':
 					top.push_back(true);
 					left_1.push_back(true);
 					right_1.push_back(false);
@@ -129,7 +128,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(true);
 					break;
-				case 7:
+				case '7':
 					top.push_back(true);
 					left_1.push_back(false);
 					right_1.push_back(true);
@@ -138,7 +137,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(false);
 					break;
-				case 8:
+				case '8':
 					top.push_back(true);
 					left_1.push_back(true);
 					right_1.push_back(true);
@@ -147,7 +146,7 @@ int main(){
 					right_2.push_back(true);
 					bottom.push_back(true);
 					break;
-				case 9:
+				case '9':
 					top.push_back(true);
 					left_1.push_back(true);
 					right_1.push_back(true);
@@ -160,13 +159,10 @@ int main(){
 					break;
 			}			
 		}
-		if(s == 0 && n == 0){
+		if(s == 0 && n == "0"){
 			break;
 		}
 		else{
-			if(first == false) cout << endl << endl;
-			else first = false;
-
 			printHorizontal(s, top);
 			cout << endl;
 			printVertical(s, left_1, right_1);
@@ -176,7 +172,10 @@ int main(){
 			printVertical(s, left_2, right_2);
 			cout << endl;
 			printHorizontal(s, bottom);
+			cout << endl;
 		}
+		cout << endl;
+
 		top.clear();
 		left_1.clear();
 		right_1.clear();

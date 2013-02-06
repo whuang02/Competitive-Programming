@@ -88,6 +88,9 @@ int main(){
 		}
 		if(first == 0) 
 			first = 1;
+		for( int i = 0 ; i < x ; i++ )
+			delete [] grid[i] ;
+		delete [] grid;
 	}
 
 	return 0;
