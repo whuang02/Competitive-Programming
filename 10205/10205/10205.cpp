@@ -1,102 +1,67 @@
-//10205
+/*
+	Solution to problem 10205
+		by: Wei Wei Huang
+	Language: C++
+*/
 #include <iostream>
 #include <string>
-#include <cstdlib>
-#include <map>
 #include <vector>
 using namespace std;
 
+#define numCards 52
+string cardValue[13] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+string cardSuits[4] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+int shuffles[100][numCards];
+
 void initDeck(vector<int>& deck){
-	for(int i = 1; i < 53; i++){
-		deck.push_back(i);
+	for(int i = 0; i < numCards; i++){
+		deck[i] = i;
 	}
 }
-void applyShuffle(vector<int>& deck, vector<int>& shuffle){
+
+void readShuffles(int numShuffles){	
+	for(int i = 0; i < numShuffles; i++){
+		for(int j = 0; j < numCards; j++){
+			cin >> shuffles[i][j];
+		}
+	}
+}
+
+void applyShuffle(vector<int>& deck, int shuffleKey){
 	vector<int> tempDeck = vector<int>(deck);
-	for(int i = 0; i < 52; i++){
-		deck[shuffle[i]-1] = tempDeck[i];
+	for(int i = 0; i < numCards; i++){
+		deck[i] = tempDeck[shuffles[shuffleKey][i] - 1];
 	}
 }
 
 void printDeck(const vector<int>& deck){
-	for(int i = 0; i < 52; i++){
-		if(deck[i] == 10 || deck[i] == 23 || deck[i] == 36 || deck[i] == 49)
-			cout << "Jack";
-		else if(deck[i] == 11 || deck[i] == 24 || deck[i] == 37 || deck[i] == 50)
-			cout << "Queen";
-		else if(deck[i] == 12 || deck[i] == 25 || deck[i] == 38 || deck[i] == 51)
-			cout << "King";
-		else if(deck[i] == 13 || deck[i] == 26 || deck[i] == 39 || deck[i] == 52)
-			cout << "Ace";
-		else
-			cout << deck[i]+1;
-
-
-		if(deck[i] <= 13)
-		{
-			cout << " of Clubs" << endl;
-		}
-		else if(deck[i] <= 26)
-		{
-			cout << " of Diamonds" << endl;
-		}
-		else if(deck[i] <= 39)
-		{
-			cout << " of Hearts" << endl;
-		}
-		else if(deck[i] <= 52)
-		{
-			cout << " of Spades" << endl;
-		}
+	for(int i = 0; i < numCards; i++){
+		cout << cardValue[deck[i] % 13] << " of " << cardSuits[deck[i] / 13] << endl;
 	}
 }
 
 int main(){
-	int cases, position;
-	bool first = true;
-	string numShuffles;
-	map< int, vector<int> > shuffles;
-	vector<int> deck;
-	string line;
-	while(cin >> cases){
-		shuffles = map< int, vector<int> >();
-		deck = vector<int>();
-		initDeck(deck);
-		for(int i = 0; i < cases; i++){
-			if(i == 0)
-			{
-				getline(cin, line);
-				getline(cin, line);
-			}
+	int cases, numShuffles, shuffleKey;
+	vector<int> deck = vector<int>(numCards);
 
-			while(cin >> numShuffles){
-				if(numShuffles == ""){
-					break;
-				}
-				else{
-					if(!first)
-						cout << endl;
-					else
-						first = false;
-					deck = vector<int>();
-					initDeck(deck);
-					int numShuff = atoi(numShuffles.c_str());
-					vector<int> positions = vector<int>();
-					for(int i = 1; i <= numShuff; i++){
-						shuffles.insert(make_pair(i, positions));
-						for(int j = 0; j < 52; j++){
-							cin >> position;
-							shuffles.at(i).push_back(position);
-						}
-					}
-					for(int k = 1; k <= numShuff; k++){
-						int key;
-						cin >> key;
-						applyShuffle(deck, shuffles.at(key));
-					}
-					printDeck(deck);
-				}
-			}
+	cin >> cases;
+
+	for(int i = 0; i < cases; i++){
+		initDeck(deck);
+
+		cin >> numShuffles;
+
+		readShuffles(numShuffles);
+
+		for(int k = 0; k < numShuffles; k++){
+			cin >> shuffleKey;
+			applyShuffle(deck, shuffleKey-1);
 		}
+
+		printDeck(deck);
+
+		if(i < cases - 1)
+			cout << endl;
 	}
+	
 }
