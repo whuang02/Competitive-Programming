@@ -1,3 +1,8 @@
+/*
+	Solution to problem 11340
+		by: Wei Wei Huang
+	Language: C++
+*/
 #include <iostream>
 #include <string>
 #include <map>
