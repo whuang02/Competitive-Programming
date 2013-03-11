@@ -1,44 +1,51 @@
+/*
+	Solution to problem 10003
+	by: Wei Wei Huang
+	Language: C++
+*/
 #include <iostream>
-#include <string>
 using namespace std;
 
-int cuts[52];
-int dp[52][52];
-int length, numCuts;
+int cuts[53];
+int dp[53][53];
 
-int cost(int left,int  right){
-	return left - right;
-}
+int Cut(int left, int right){
+	int min = 9999999999, cutCost = 0;
 
-string Cut(int left, int right){
-	int min, cutCost;
-	for(int a = 2; a <= numCuts; a++){
-		for(int left = 0, right = a; right <= numCuts; left++, right++){
-			min = INT_MAX;
-			for(int k = left+1; k < right; k++){
-				cutCost = cost(cuts[right], cuts[left]) + dp[left][k] + dp[k][right];
-				min = (cutCost < min) ? cutCost : min;
-			}
-			dp[left][right] = min;
-		}
+	if(left + 1 == right) //break case no more cuts
+		return 0;
+	else if(dp[left][right] != 0)
+		return dp[left][right];
+
+	//Do every cut between the left and right side of the stick and get the total cost
+	for(int i = left + 1; i < right; i++){
+		cutCost = Cut(left, i) + Cut(i, right) + cuts[right] - cuts[left];
+		min = (cutCost < min) ? cutCost : min;
 	}
-	return "The minimum cutting is " + dp[0][numCuts];
+	dp[left][right] = min;
+
+	return dp[left][right];
 }
 
 int main(){
-	int cut, min;
+	int cut, numCuts, length;
 
 	while(cin >> length){
 		if(length == 0)
 			break;
-		else{
-			cin >> numCuts;
-			for(int i = 1; i < numCuts; i++){
-				cin >> cuts[i];
-				cuts[i] = length;
-			}
-			
-			cout << Cut(0, length) << "." << endl;
+		cin >> numCuts;
+
+		cuts[0] = 0;
+		cuts[numCuts+1] = length;
+		for(int i = 1; i <= numCuts; i++){
+			cin >> cuts[i];
 		}
+		
+		for ( int i = 0; i < 53; i++ ) {
+	        for ( int j = 0; j < 53; j++ )
+	            dp[i][j] = 0;
+	    }
+			
+		cout << "The minimum cutting is " << Cut(0, numCuts+1) << "." << endl;
 	}
 }
