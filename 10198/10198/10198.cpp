@@ -1,8 +1,14 @@
+/*
+	Solution to problem 10198
+	by: Wei Wei Huang
+	Language: C++
+*/
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 using namespace std;
 
+//Big int class needed to bigger integer values
 class BigInt{
 public:
 	vector<int> integer;
@@ -36,6 +42,7 @@ public:
 	}
 };
 
+//output operator for the big int class
 ostream& operator<<(ostream& os, const BigInt& rhs){
 	for(int i = rhs.integer.size()-1; i >= 0; i--){
 		os << rhs.integer[i];
